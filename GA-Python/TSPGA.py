@@ -202,28 +202,24 @@ class TspGA(object):
 		momPartMap = dict(zip(momParts, dadParts))
 		# crossover and create one child
 		for i in xrange(x):
-			if dadCityIds[i] in momParts:
-				childCityIds1.append(momPartMap[dadCityIds[i]])
-			else:
-				childCityIds1.append(dadCityIds[i])
+			while dadCityIds[i] in momParts:
+				dadCityIds[i]=momPartMap[dadCityIds[i]]
+			childCityIds1.append(dadCityIds[i])
 		childCityIds1.extend(momParts)
 		for j in xrange(y+1, self.numCities):
-			if dadCityIds[j] in momParts:
-				childCityIds1.append(momPartMap[dadCityIds[j]])
-			else:
-				childCityIds1.append(dadCityIds[j])
+			while dadCityIds[j] in momParts:
+				dadCityIds[i]=momPartMap[dadCityIds[j]]
+			childCityIds1.append(dadCityIds[j])
 		# create two child
 		for i in xrange(x):
-			if momCityIds[i] in dadParts:
-				childCityIds2.append(dadPartMap[momCityIds[i]])
-			else:
-				childCityIds2.append(momCityIds[i])
+			while momCityIds[i] in dadParts:
+				momCityIds[i]dadPartMap[momCityIds[i]]
+			childCityIds2.append(momCityIds[i])
 		childCityIds2.extend(dadParts)
 		for j in xrange(y+1, self.numCities):
-			if momCityIds[j] in dadParts:
-				childCityIds2.append(dadPartMap[momCityIds[j]])
-			else:
-				childCityIds2.append(momCityIds[j])
+			while momCityIds[j] in dadParts:
+				momCityIds[j]=dadPartMap[momCityIds[j]]
+			childCityIds2.append(momCityIds[j])
 		childCities1 = [self.directory[m] for m in childCityIds1]
 		child1 = Route(childCities1, self.calcRouteLength(childCities1))
 		childCities2 = [self.directory[n] for n in childCityIds2]
